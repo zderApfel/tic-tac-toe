@@ -9,7 +9,7 @@ const Menu = () => {
                 alert("You forgot to enter a name!");
             }
             else{
-                window.location="game.html";
+                location.href="game.html";
             }
         })
     }
