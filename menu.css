@@ -27,6 +27,7 @@ body, div, input, button, h1, ul{
 
 #play-button{
     margin-top: 10px;
+    width: 100px;
     font-size: 20px;
 }
 

@@ -1,3 +1,10 @@
+h1 {
+    margin: 0;
+    padding: 0;
+    font-family: 'Dosis', sans-serif;
+    list-style-type: none;
+}
+
 #game-box{
     position: absolute;
     margin: 0;
