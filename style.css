@@ -1,4 +1,8 @@
-#game-board{
+body, div, input, button{
+    font-family: 'Dosis', sans-serif;
+}
+
+#game-board, #menu-box{
     position: absolute;
     margin: 0;
     border-style: solid;
@@ -8,4 +12,26 @@
     transform: translate(-50%, -50%);
     width: 700px;
     height: 700px;
+}
+
+#menu-box{
+    border-style: none; /*Placeholder until border is removed from game board*/
+}
+
+#title{
+    margin-top: 35%;
+    text-align: center;
+}
+
+#fields{
+    text-align: center;
+    margin: 0;
+}
+
+#play-button{
+    font-size: 20px;
+}
+
+.name-field, label{
+    font-size: 20px;
 }
