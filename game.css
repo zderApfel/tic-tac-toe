@@ -5,7 +5,7 @@ h1 {
     list-style-type: none;
 }
 
-#game-box{
+#game-board{
     position: absolute;
     margin: 0;
     border-style: solid;
