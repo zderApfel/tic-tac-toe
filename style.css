@@ -1,4 +1,6 @@
-body, div, input, button{
+body, div, input, button, h1, ul{
+    margin: 0;
+    padding: 0;
     font-family: 'Dosis', sans-serif;
 }
 
@@ -20,18 +22,25 @@ body, div, input, button{
 
 #title{
     margin-top: 35%;
-    text-align: center;
 }
 
 #fields{
+    list-style-type: none;
+
+}
+
+#fields, .name-field{
     text-align: center;
-    margin: 0;
+    margin: auto;
+    font-size: 20px;
 }
 
 #play-button{
+    margin-top: 10px;
     font-size: 20px;
 }
 
-.name-field, label{
-    font-size: 20px;
+.name-field{
+    margin-top: 10px;
+    width: 300px;
 }
