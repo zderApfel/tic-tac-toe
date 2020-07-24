@@ -11,13 +11,16 @@ const Menu = () => {
                 alert("You forgot to enter a name!");
             }
             else{
-                location.href="game.html";
-                playerOne = playerOneInput.value; // I am trying to get this:
-                playerTwo = playerTwoInput.value; // and this to game.js, which is operating on the game.html file. But every method I've used does not work
+                playerOne = playerOneInput.value;
+                localStorage.setItem("player1", playerOne);
+                playerTwo = playerTwoInput.value;
+                localStorage.setItem("player2", playerTwo);
+                location.href= "game.html";
+                
             }
         });
     }
-    return { init, playerOne, playerTwo };
+    return { init };
 }
 
 const initialize = Menu();
