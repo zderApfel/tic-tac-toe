@@ -1,3 +1,7 @@
+p {
+    font-size: 20px;
+}
+
 h1 {
     margin: 0;
     padding: 0;
@@ -5,14 +9,45 @@ h1 {
     list-style-type: none;
 }
 
-#game-board{
-    position: absolute;
-    margin: 0;
+#game-frame, #game-board, #scoreboard{
     border-style: solid;
     border-color: black;
+}
+
+#game-frame{
+    position: absolute;
+    margin: 0;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 700px;
     height: 700px;
+}
+
+#game-board{
+    position: relative;
+    width: 90%;
+    height: 70%;
+    margin: 1% 0 0 5%;
+}
+
+
+#scoreboard{
+    height: 150px;
+    width: 80%;
+    margin: 2% 0 0 10%;
+}
+
+#player1-score, #player2-score{
+    height: 150px;
+    width: 35%;
+    text-align: center;
+}
+
+#player1-score{
+    float: left;
+}
+
+#player2-score{
+    float: right;
 }
