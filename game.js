@@ -4,10 +4,6 @@ function Player(playerName, score, symbol) {
     this.nameBoard = document.getElementById(`${symbol}-player`).innerHTML = this.playerName;
     this.scoreBoard = document.getElementById(`${symbol}-score`)
     this.scoreBoard.innerHTML = this.score;
-    const changeScore = (amount) => {
-        this.score = this.score + 1;
-        this.scoreBoard.innerHTML = this.score;
-    }
 }
 
 const ActivateBoard = () => {
@@ -16,3 +12,4 @@ const ActivateBoard = () => {
 }
 
 const begin = ActivateBoard();
+
