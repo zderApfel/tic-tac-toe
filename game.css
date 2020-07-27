@@ -1,4 +1,4 @@
-h1, h2, p, button{
+h1, h2, p, button, .cell{
     font-family: 'Dosis', sans-serif;
 }
 
@@ -12,12 +12,21 @@ p {
     font-size: 20px;
 }
 
-table { 
+table {
     width: 100%;
     height: 100%;
 }
 
+tr {
+    height: 33%
+}
+
 .cell{
+    width: 33%;
+    position: relative;
+    user-select: none;
+    text-align: center;
+    font-size: 110px;
     border-style: dashed;
     border-color: rgb(150, 31, 31);
 }
