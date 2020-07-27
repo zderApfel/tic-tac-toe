@@ -12,31 +12,31 @@
         <div id="game-frame">
             <div id="game-board">
                 <table>
-                    <tr>
-                        <td class="cell"></td>
-                        <td class="cell"></td>
-                        <td class="cell"></td>
+                    <tr class="row" id="a">
+                        <td class="cell" id="a1"></td>
+                        <td class="cell" id="a2"></td>
+                        <td class="cell" id="a3"></td>
                     </tr>
-                    <tr>
-                        <td class="cell"></td>
-                        <td class="cell"></td>
-                        <td class="cell"></td>
+                    <tr class="row" id="b">
+                        <td class="cell" id="b1"></td>
+                        <td class="cell" id="b2"></td>
+                        <td class="cell" id="b3"></td>
                     </tr>
-                    <tr>
-                        <td class="cell"></td>
-                        <td class="cell"></td>
-                        <td class="cell"></td>
+                    <tr class="row" id="c">
+                        <td class="cell" id="c1"></td>
+                        <td class="cell" id="c2"></td>
+                        <td class="cell" id="c3"></td>
                     </tr>
                 </table>
             </div>
             <div id="scoreboard">
-                <div id="player1-score">
-                    <h2>_player1name_</h2>
-                    <p>score</p>
+                <div id="player1-scoreboard">
+                    <h2 id="o-player">_player1name_</h2>
+                    <p id="o-score">_score_</p>
                 </div>
-                <div id="player2-score">
-                    <h2>_player2name_</h2>
-                    <p>score</p>
+                <div id="player2-scoreboard">
+                    <h2 id="x-player">_player2name_</h2>
+                    <p id="x-score">_score_</p>
                 </div>
                 <button id="menu-button">Back to Menu</button>
                 <p id="results"></p>

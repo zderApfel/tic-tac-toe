@@ -31,12 +31,8 @@ table {
 }
 
 .filled{
-    /*Class for after it is filled with a symbol*/
-}
-
-#scoreboard{
-    border-style: solid;
-    border-color: black;
+    border-style: dashed;
+    border-color: rgb(150, 31, 31);
 }
 
 #game-frame{
@@ -61,6 +57,8 @@ table {
     height: 150px;
     width: 80%;
     margin: 2% 0 0 10%;
+    border-style: solid;
+    border-color: black;
 }
 
 #replay-button, #menu-button{
@@ -76,17 +74,17 @@ table {
     float: right;
 }
 
-#player1-score, #player2-score{
+#player1-scoreboard, #player2-scoreboard{
     height: 150px;
     width: 35%;
     text-align: center;
 }
 
-#player1-score{
+#player1-scoreboard{
     float: left;
 }
 
-#player2-score{
+#player2-scoreboard{
     float: right;
 }
 
