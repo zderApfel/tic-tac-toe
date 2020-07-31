@@ -11,8 +11,10 @@ const TicTacToe = () => {
     const PLAYER_1 = new Player(localStorage.getItem("player1"), 0, "o");
     const PLAYER_2 = new Player(localStorage.getItem("player2"), 0, "x");
     const CELLS = document.getElementsByClassName("cell");
+    const ALERT = document.getElementById("alert");
     let selected = [];
     let whoseTurn = PLAYER_1; //Player 1 (O) always goes first, like in chess where white goes first
+    
     const initialize = () => {
         PLAYER_1.nameBoard.innerHTML = `${PLAYER_1.playerName} -- O`;
         PLAYER_2.nameBoard.innerHTML = `${PLAYER_2.playerName} -- X`;
@@ -21,11 +23,14 @@ const TicTacToe = () => {
         for (let i = 0; i <= 8; i++){
             CELLS[i].addEventListener("click", function(){game(whoseTurn, CELLS[i])});
         }
+        ALERT.innerHTML = `${whoseTurn.playerName}, it is your turn`;
     }
+    
     const changeScore = (player, amount) => {
         player.score = player.score + amount;
         player.scoreBoard.innerHTML = player.score;
     }
+    
     const game = (turn, cell) => {
         if(selected.includes(cell) == false){
             cell.innerHTML = turn.symbol.toUpperCase();
@@ -41,6 +46,7 @@ const TicTacToe = () => {
                 whoseTurn = PLAYER_1;
             }
         }
+        ALERT.innerHTML = `${whoseTurn.playerName}, it is your turn`;
     }
 
     return { initialize }
