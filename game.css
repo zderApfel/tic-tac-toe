@@ -39,10 +39,6 @@ tr {
     background-color: white;
 }
 
-.filled{
-    border-style: dashed;
-    border-color: rgb(150, 31, 31);
-}
 
 #game-frame{
     position: absolute;

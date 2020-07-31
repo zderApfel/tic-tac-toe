@@ -1,7 +1,8 @@
 function Player(playerName, score, symbol) {
     this.playerName = playerName;
-    this.score = score;
     this.symbol = symbol;
+    this.score = score;
+    this.choices = [];
     this.nameBoard = document.getElementById(`${this.symbol}-player`);
     this.scoreBoard = document.getElementById(`${this.symbol}-score`);
 }
@@ -10,6 +11,7 @@ const TicTacToe = () => {
     const PLAYER_1 = new Player(localStorage.getItem("player1"), 0, "o");
     const PLAYER_2 = new Player(localStorage.getItem("player2"), 0, "x");
     const CELLS = document.getElementsByClassName("cell");
+    let selected = [];
     let whoseTurn = PLAYER_1; //Player 1 (O) always goes first, like in chess where white goes first
     const initialize = () => {
         PLAYER_1.nameBoard.innerHTML = `${PLAYER_1.playerName} -- O`;
@@ -25,14 +27,20 @@ const TicTacToe = () => {
         player.scoreBoard.innerHTML = player.score;
     }
     const game = (turn, cell) => {
-        let symbol;
-        if(turn == PLAYER_1){
-            symbol = "O";
+        if(selected.includes(cell) == false){
+            cell.innerHTML = turn.symbol.toUpperCase();
+            turn.choices.push(cell);
+            selected.push(cell)
+            console.log(turn.choices);
+            
+            
+            if (turn == PLAYER_1){
+                whoseTurn = PLAYER_2;
+            }
+            else {
+                whoseTurn = PLAYER_1;
+            }
         }
-        else{
-            symbol = "X";
-        }
-        cell.innerHTML = symbol;
     }
 
     return { initialize }
