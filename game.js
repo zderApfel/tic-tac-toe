@@ -1,8 +1,13 @@
+function Cell(id){
+    this.id = id; //Ids of each cell are a number from 1-9
+    this.element = document.getElementById(id);
+    this.activeBy = null;
+}
+
 function Player(playerName, score, symbol) {
     this.playerName = playerName;
     this.symbol = symbol;
     this.score = score;
-    this.choices = [];
     this.nameBoard = document.getElementById(`${this.symbol}-player`);
     this.scoreBoard = document.getElementById(`${this.symbol}-score`);
 }
@@ -10,9 +15,8 @@ function Player(playerName, score, symbol) {
 const TicTacToe = () => {
     const PLAYER_1 = new Player(localStorage.getItem("player1"), 0, "o");
     const PLAYER_2 = new Player(localStorage.getItem("player2"), 0, "x");
-    const CELLS = document.getElementsByClassName("cell");
+    const CELLS = [];
     const ALERT = document.getElementById("alert");
-    let selected = [];
     let whoseTurn = PLAYER_1; //Player 1 (O) always goes first, like in chess where white goes first
     
     const initialize = () => {
@@ -20,8 +24,9 @@ const TicTacToe = () => {
         PLAYER_2.nameBoard.innerHTML = `${PLAYER_2.playerName} -- X`;
         PLAYER_1.scoreBoard.innerHTML = PLAYER_1.score;
         PLAYER_2.scoreBoard.innerHTML = PLAYER_2.score;
-        for (let i = 0; i <= 8; i++){
-            CELLS[i].addEventListener("click", function(){game(whoseTurn, CELLS[i])});
+        for (let i = 1; i <= 9; i++){
+            CELLS.push(new Cell(i));
+            CELLS[i-1].element.addEventListener("click", function(){game(whoseTurn, CELLS[i-1].element)});
         }
         ALERT.innerHTML = `${whoseTurn.playerName}, it is your turn`;
     }
@@ -32,21 +37,18 @@ const TicTacToe = () => {
     }
     
     const game = (turn, cell) => {
-        if(selected.includes(cell) == false){
+        if(cell.activeBy == null){
             cell.innerHTML = turn.symbol.toUpperCase();
-            turn.choices.push(cell);
-            selected.push(cell)
-            console.log(turn.choices);
-            
-            
+            cell.activeBy = turn;            
+
             if (turn == PLAYER_1){
                 whoseTurn = PLAYER_2;
             }
             else {
                 whoseTurn = PLAYER_1;
             }
+            ALERT.innerHTML = `${whoseTurn.playerName}, it is your turn`;
         }
-        ALERT.innerHTML = `${whoseTurn.playerName}, it is your turn`;
     }
 
     return { initialize }
