@@ -44,7 +44,7 @@ const TicTacToe = () => {
                 whoseTurn = PLAYER_1;
             }
         }
-        console.log(checkBoard().playerName);
+        console.log(checkBoard());
         ALERT.innerHTML = `${whoseTurn.playerName}, it is your turn`;
     }
 
@@ -64,10 +64,10 @@ const TicTacToe = () => {
         for (let x in VICTORY_CONDITIONS){
             let array = VICTORY_CONDITIONS[x];
             if (testArray[array[0]-1] == "o" && testArray[array[1]-1] == "o" && testArray[array[2]-1] == "o"){
-                return PLAYER_1;
+                return PLAYER_1.playerName;
             }
             else if (testArray[array[0]-1] == "x" && testArray[array[1]-1] == "x" && testArray[array[2]-1] == "x"){
-                return PLAYER_2;
+                return PLAYER_2.playerName;
             }
         }
         
