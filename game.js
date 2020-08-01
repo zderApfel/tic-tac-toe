@@ -16,8 +16,8 @@ function Player(playerName, score, symbol) {
 const TicTacToe = () => {
     const PLAYER_1 = new Player(localStorage.getItem("player1"), 0, "o");
     const PLAYER_2 = new Player(localStorage.getItem("player2"), 0, "x");
-    const CELLS = [];
     const ALERT = document.getElementById("alert");
+    const CELLS = [];
     let whoseTurn = PLAYER_1; //Player 1 (O) always goes first, like in chess where white goes first
     
     const initialize = () => {
@@ -31,21 +31,57 @@ const TicTacToe = () => {
         }
         ALERT.innerHTML = `${whoseTurn.playerName}, it is your turn`;
     }
+
+    const newGame = (winner) => {
+        for (let x in CELLS){
+            CELLS[x].activeBy = null;
+            CELLS[x].element.innerHTML = "";
+        }
+        changeScore(winner, 1);
+    }
     
     const game = (turn, cellID) => {
         let cell = CELLS[cellID];
         if (cell.activeBy == null){
             cell.element.innerHTML = turn.symbol.toUpperCase();
             cell.activeBy = turn;  
+        }
+        let result = checkBoard();
+        console.log(result);
+        if (result != null && result != "tie"){
+            ALERT.innerHTML = `${result.playerName} wins!`;
+            const BUTTON_CONTAINER = document.getElementById("button-container");
+            const REPLAY_BUTTON = document.createElement("button");
+            REPLAY_BUTTON.id = "replay-button";
+            REPLAY_BUTTON.innerHTML = "Play Again";
+            BUTTON_CONTAINER.appendChild(REPLAY_BUTTON);
+            REPLAY_BUTTON.addEventListener("click", function() {
+                newGame(result);
+                REPLAY_BUTTON.remove();
+            });
+        }
+        else if (result == null){
             if (turn == PLAYER_1){
                 whoseTurn = PLAYER_2;
             }
             else {
                 whoseTurn = PLAYER_1;
             }
+            ALERT.innerHTML = `${whoseTurn.playerName}, it is your turn`;
         }
-        console.log(checkBoard());
-        ALERT.innerHTML = `${whoseTurn.playerName}, it is your turn`;
+        else if (result == "tie"){
+            ALERT.innerHTML = `Nobody wins!`;
+            const BUTTON_CONTAINER = document.getElementById("button-container");
+            const REPLAY_BUTTON = document.createElement("button");
+            REPLAY_BUTTON.id = "replay-button";
+            REPLAY_BUTTON.innerHTML = "Play Again";
+            BUTTON_CONTAINER.appendChild(REPLAY_BUTTON);
+            REPLAY_BUTTON.addEventListener("click", function() {
+                const newGame = TicTacToe();
+                newGame.initialize;
+            });
+        }
+        
     }
 
     const checkBoard = () => {
@@ -64,14 +100,13 @@ const TicTacToe = () => {
         for (let x in VICTORY_CONDITIONS){
             let array = VICTORY_CONDITIONS[x];
             if (testArray[array[0]-1] == "o" && testArray[array[1]-1] == "o" && testArray[array[2]-1] == "o"){
-                return PLAYER_1.playerName;
+                return PLAYER_1;
             }
             else if (testArray[array[0]-1] == "x" && testArray[array[1]-1] == "x" && testArray[array[2]-1] == "x"){
-                return PLAYER_2.playerName;
+                return PLAYER_2;
             }
         }
         
-        console.log(testArray);
 
         function makeTestArray(){    
             for (let x in CELLS){
