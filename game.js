@@ -21,6 +21,10 @@ const TicTacToe = () => {
     let whoseTurn = PLAYER_1; //Player 1 (O) always goes first, like in chess where white goes first
     
     const initialize = () => {
+        const MENU_BUTTON = document.getElementById("menu-button");
+        MENU_BUTTON.addEventListener("click", function() {
+            location.href= "index.html";
+        })
         PLAYER_1.nameBoard.innerHTML = `${PLAYER_1.playerName} -- O`;
         PLAYER_2.nameBoard.innerHTML = `${PLAYER_2.playerName} -- X`;
         PLAYER_1.scoreBoard.innerHTML = PLAYER_1.score;
