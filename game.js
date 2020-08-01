@@ -38,6 +38,7 @@ const TicTacToe = () => {
             CELLS[x].element.innerHTML = "";
         }
         changeScore(winner, amount);
+        whoseTurn = PLAYER_1;
     }
     
     const game = (turn, cellID) => {
