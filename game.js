@@ -8,6 +8,7 @@ function Player(playerName, score, symbol) {
     this.playerName = playerName;
     this.symbol = symbol;
     this.score = score;
+    this.choices = [];
     this.nameBoard = document.getElementById(`${this.symbol}-player`);
     this.scoreBoard = document.getElementById(`${this.symbol}-score`);
 }
@@ -26,35 +27,76 @@ const TicTacToe = () => {
         PLAYER_2.scoreBoard.innerHTML = PLAYER_2.score;
         for (let i = 1; i <= 9; i++){
             CELLS.push(new Cell(i));
-            CELLS[i-1].element.addEventListener("click", function(){game(whoseTurn, CELLS[i-1].element)});
+            CELLS[i-1].element.addEventListener("click", function(){game(whoseTurn, i-1)});
         }
         ALERT.innerHTML = `${whoseTurn.playerName}, it is your turn`;
     }
     
-    const changeScore = (player, amount) => {
-        player.score = player.score + amount;
-        player.scoreBoard.innerHTML = player.score;
-    }
-    
-    const game = (turn, cell) => {
-        if(cell.activeBy == null){
-            cell.innerHTML = turn.symbol.toUpperCase();
-            cell.activeBy = turn;            
-
+    const game = (turn, cellID) => {
+        let cell = CELLS[cellID];
+        if (cell.activeBy == null){
+            cell.element.innerHTML = turn.symbol.toUpperCase();
+            cell.activeBy = turn;  
             if (turn == PLAYER_1){
                 whoseTurn = PLAYER_2;
             }
             else {
                 whoseTurn = PLAYER_1;
             }
-            ALERT.innerHTML = `${whoseTurn.playerName}, it is your turn`;
         }
+        console.log(checkBoard().playerName);
+        ALERT.innerHTML = `${whoseTurn.playerName}, it is your turn`;
+    }
+
+    const checkBoard = () => {
+        const VICTORY_CONDITIONS = [
+            [1,2,3],
+            [4,5,6],
+            [7,8,9],
+            [1,4,7],
+            [2,5,8],
+            [3,6,9],
+            [1,5,9],
+            [3,5,7]
+        ];
+        let testArray = [];
+        makeTestArray();
+        for (let x in VICTORY_CONDITIONS){
+            let array = VICTORY_CONDITIONS[x];
+            if (testArray[array[0]-1] == "o" && testArray[array[1]-1] == "o" && testArray[array[2]-1] == "o"){
+                return PLAYER_1;
+            }
+            else if (testArray[array[0]-1] == "x" && testArray[array[1]-1] == "x" && testArray[array[2]-1] == "x"){
+                return PLAYER_2;
+            }
+        }
+        
+        console.log(testArray);
+
+        function makeTestArray(){    
+            for (let x in CELLS){
+                switch (CELLS[x].activeBy){
+                    case PLAYER_1:
+                        testArray.push(PLAYER_1.symbol);
+                        break;
+                    case PLAYER_2:
+                        testArray.push(PLAYER_2.symbol);
+                        break;
+                    case null:
+                        testArray[x] = null;
+                        break;
+                }
+            }
+        }
+    }
+
+    const changeScore = (player, amount) => {
+        player.score = player.score + amount;
+        player.scoreBoard.innerHTML = player.score;
     }
 
     return { initialize }
 }
 
 const begin = TicTacToe();
-
 begin.initialize();
-
