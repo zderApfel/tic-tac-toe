@@ -32,35 +32,19 @@ const TicTacToe = () => {
         ALERT.innerHTML = `${whoseTurn.playerName}, it is your turn`;
     }
 
-    const newGame = (winner) => {
+    const newGame = (winner, amount) => {
         for (let x in CELLS){
             CELLS[x].activeBy = null;
             CELLS[x].element.innerHTML = "";
         }
-        changeScore(winner, 1);
+        changeScore(winner, amount);
     }
     
     const game = (turn, cellID) => {
         let cell = CELLS[cellID];
         if (cell.activeBy == null){
             cell.element.innerHTML = turn.symbol.toUpperCase();
-            cell.activeBy = turn;  
-        }
-        let result = checkBoard();
-        console.log(result);
-        if (result != null && result != "tie"){
-            ALERT.innerHTML = `${result.playerName} wins!`;
-            const BUTTON_CONTAINER = document.getElementById("button-container");
-            const REPLAY_BUTTON = document.createElement("button");
-            REPLAY_BUTTON.id = "replay-button";
-            REPLAY_BUTTON.innerHTML = "Play Again";
-            BUTTON_CONTAINER.appendChild(REPLAY_BUTTON);
-            REPLAY_BUTTON.addEventListener("click", function() {
-                newGame(result);
-                REPLAY_BUTTON.remove();
-            });
-        }
-        else if (result == null){
+            cell.activeBy = turn;
             if (turn == PLAYER_1){
                 whoseTurn = PLAYER_2;
             }
@@ -69,19 +53,32 @@ const TicTacToe = () => {
             }
             ALERT.innerHTML = `${whoseTurn.playerName}, it is your turn`;
         }
-        else if (result == "tie"){
-            ALERT.innerHTML = `Nobody wins!`;
+        let result = checkBoard();
+        console.log(result);
+        if (result != null){
             const BUTTON_CONTAINER = document.getElementById("button-container");
             const REPLAY_BUTTON = document.createElement("button");
             REPLAY_BUTTON.id = "replay-button";
             REPLAY_BUTTON.innerHTML = "Play Again";
             BUTTON_CONTAINER.appendChild(REPLAY_BUTTON);
-            REPLAY_BUTTON.addEventListener("click", function() {
-                const newGame = TicTacToe();
-                newGame.initialize;
-            });
+            if (result == "tie"){
+                ALERT.innerHTML = `Nobody wins!`;
+                REPLAY_BUTTON.addEventListener("click", function() {
+                    newGame(PLAYER_1, 0);
+                    REPLAY_BUTTON.remove();
+                });
+            }
+            else {
+                ALERT.innerHTML = `${result.playerName} wins!`;
+                REPLAY_BUTTON.addEventListener("click", function() {
+                    newGame(result, 1);
+                    REPLAY_BUTTON.remove();
+                });
+            }
         }
-        
+        else if (result == null){
+            
+        }
     }
 
     const checkBoard = () => {
@@ -99,15 +96,21 @@ const TicTacToe = () => {
         makeTestArray();
         for (let x in VICTORY_CONDITIONS){
             let array = VICTORY_CONDITIONS[x];
+            let hasWinner = false;
             if (testArray[array[0]-1] == "o" && testArray[array[1]-1] == "o" && testArray[array[2]-1] == "o"){
+                hasWinner = true;
                 return PLAYER_1;
             }
             else if (testArray[array[0]-1] == "x" && testArray[array[1]-1] == "x" && testArray[array[2]-1] == "x"){
+                hasWinner = true;
                 return PLAYER_2;
             }
+            
+            if (hasWinner == false && testArray.includes(null) == false){
+                return "tie";
+            }
         }
-        
-
+    
         function makeTestArray(){    
             for (let x in CELLS){
                 switch (CELLS[x].activeBy){
