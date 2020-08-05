@@ -43,6 +43,7 @@ tr {
 #game-frame{
     position: absolute;
     margin: 0;
+    margin-top: 2%;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
